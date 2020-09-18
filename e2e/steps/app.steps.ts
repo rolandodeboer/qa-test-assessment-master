@@ -1,19 +1,21 @@
-const { Given , When , Then } = require('cucumber');
-const { browser, by } = require('protractor');
+import {protractor} from 'protractor';
+
+const {Given, When, Then} = require('cucumber');
+const {browser, by} = require('protractor');
 const chai = require('chai');
 chai.use(require('chai-as-promised'));
 const searchPage = require('../pages/searchpage.po');
 
-Given('The app is open on {string}', { timeout: 25 * 1000 }, async (string) => {
-    await browser.get('http://' + string + ':4200/');
-    await chai.expect(browser.element(by.id('query')).isDisplayed()).to.eventually.be.true;
+Given('The app is open on {string}', {timeout: 25 * 1000}, async (string) => {
+  await browser.get('http://' + string + ':4200/');
+  await chai.expect(browser.element(by.id('query')).isDisplayed()).to.eventually.be.true;
 });
 
-  When('I search for a valid character', async () => {
-    await searchPage.radioBtnPeople.click();
-    await searchPage.inputSearch.sendKeys('Chewbacca');
-    await searchPage.btnSearch.click();
-  });
+When('I search for a valid character', async () => {
+  await searchPage.radioBtnPeople.click();
+  await searchPage.inputSearch.sendKeys('Chewbacca');
+  await searchPage.btnSearch.click();
+});
 
 When('I search for an invalid character', async () => {
   await searchPage.radioBtnPeople.click();
@@ -33,18 +35,18 @@ When('I search for an invalid planet', async () => {
   await searchPage.btnSearch.click();
 });
 
-  Then('the details of the character are displayed', async () => {
-    await chai.expect(searchPage.labelCharacterName.getAttribute('innerText'))
-      .to.eventually.contain('Chewbacca');
-    await chai.expect(searchPage.labelGender.getAttribute('innerText'))
-      .to.eventually.contain('male');
-    await chai.expect(searchPage.labelBirthYear.getAttribute('innerText'))
-      .to.eventually.contain('200BBY');
-    await chai.expect(searchPage.labelEyeColor.getAttribute('innerText'))
-      .to.eventually.contain('blue');
-    await chai.expect(searchPage.labelSkinColor.getAttribute('innerText'))
-      .to.eventually.contain('unknown');
-  });
+Then('the details of the character are displayed', async () => {
+  await chai.expect(searchPage.labelCharacterName.getAttribute('innerText'))
+    .to.eventually.contain('Chewbacca');
+  await chai.expect(searchPage.labelGender.getAttribute('innerText'))
+    .to.eventually.contain('male');
+  await chai.expect(searchPage.labelBirthYear.getAttribute('innerText'))
+    .to.eventually.contain('200BBY');
+  await chai.expect(searchPage.labelEyeColor.getAttribute('innerText'))
+    .to.eventually.contain('blue');
+  await chai.expect(searchPage.labelSkinColor.getAttribute('innerText'))
+    .to.eventually.contain('unknown');
+});
 
 Then('the details of the planet are displayed', async () => {
   await chai.expect(searchPage.labelPlanetName.getAttribute('innerText'))
@@ -57,22 +59,28 @@ Then('the details of the planet are displayed', async () => {
     .to.eventually.contain('0.85 standard');
 });
 
-  Then('a message is display that nothing is found', async () => {
-    await chai.expect(searchPage.resultNotFound.getAttribute('innerText'))
-      .to.eventually.contain('Not found');
-  });
+Then('a message is display that nothing is found', async () => {
+  await chai.expect(searchPage.resultNotFound.getAttribute('innerText'))
+    .to.eventually.contain('Not found');
+});
 
-  When('I clear the search field', async () => {
-    await searchPage.inputSearch.clear();
+When('I clear the search field', async () => {
+  await searchPage.inputSearch.clear();
+});
 
-  });
+When('I click the search button', async () => {
+  await searchPage.btnSearch.click();
+});
 
-  When('I click the search button', async () => {
-    await searchPage.btnSearch.click();
+Then('I should get an empty result field', async () => {
+  await chai.expect(searchPage.cardBlock.isDisplayed()).to.eventually.be.false;
+});
 
-  });
+When('I enter a valid character in the search field', async () => {
+  await searchPage.inputSearch.sendKeys('Chewbacca');
+});
 
-  Then('I should get an empty result field', async () => {
-
-    await chai.expect(searchPage.cardBlock.isDisplayed()).to.eventually.be.false;
-  });
+When('I press enter', async () => {
+  await searchPage.btnSearch.sendKeys(protractor.Key.ENTER);
+})
+;
