@@ -1,6 +1,3 @@
-// tslint:disable-next-line:comment-format
- //import {element} from 'protractor';
-
 const { Given , When , Then } = require('cucumber');
 const { browser, by } = require('protractor');
 const chai = require('chai');
@@ -9,7 +6,6 @@ const searchPage = require('../pages/searchpage.po');
 
 Given('The app is open on {string}', { timeout: 25 * 1000 }, async (string) => {
     await browser.get('http://' + string + ':4200/');
-    await browser.sleep(2000);
     await chai.expect(browser.element(by.id('query')).isDisplayed()).to.eventually.be.true;
 });
 
@@ -17,28 +13,24 @@ Given('The app is open on {string}', { timeout: 25 * 1000 }, async (string) => {
     await searchPage.radioBtnPeople.click();
     await searchPage.inputSearch.sendKeys('Chewbacca');
     await searchPage.btnSearch.click();
-    await browser.sleep(2000);
   });
 
 When('I search for an invalid character', async () => {
   await searchPage.radioBtnPeople.click();
   await searchPage.inputSearch.sendKeys('Bewchacca');
   await searchPage.btnSearch.click();
-  await browser.sleep(2000);
 });
 
 When('I search for a valid planet', async () => {
   await searchPage.radioBtnPlanets.click();
   await searchPage.inputSearch.sendKeys('Endor');
   await searchPage.btnSearch.click();
-  await browser.sleep(2000);
 });
 
 When('I search for an invalid planet', async () => {
   await searchPage.radioBtnPlanets.click();
   await searchPage.inputSearch.sendKeys('DEnor');
   await searchPage.btnSearch.click();
-  await browser.sleep(2000);
 });
 
   Then('the details of the character are displayed', async () => {
@@ -72,13 +64,11 @@ Then('the details of the planet are displayed', async () => {
 
   When('I clear the search field', async () => {
     await searchPage.inputSearch.clear();
-    await browser.sleep(2000);
 
   });
 
   When('I click the search button', async () => {
     await searchPage.btnSearch.click();
-    await browser.sleep(2000);
 
   });
 
