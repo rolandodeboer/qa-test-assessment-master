@@ -11,30 +11,6 @@ Given('The app is open on {string}', {timeout: 25 * 1000}, async (string) => {
   await chai.expect(browser.element(by.id('query')).isDisplayed()).to.eventually.be.true;
 });
 
-When('I search for a valid character', async () => {
-  await searchPage.radioBtnPeople.click();
-  await searchPage.inputSearch.sendKeys('Chewbacca');
-  await searchPage.btnSearch.click();
-});
-
-When('I search for an invalid character', async () => {
-  await searchPage.radioBtnPeople.click();
-  await searchPage.inputSearch.sendKeys('Bewchacca');
-  await searchPage.btnSearch.click();
-});
-
-When('I search for a valid planet', async () => {
-  await searchPage.radioBtnPlanets.click();
-  await searchPage.inputSearch.sendKeys('Endor');
-  await searchPage.btnSearch.click();
-});
-
-When('I search for an invalid planet', async () => {
-  await searchPage.radioBtnPlanets.click();
-  await searchPage.inputSearch.sendKeys('DEnor');
-  await searchPage.btnSearch.click();
-});
-
 Then('the details of the character are displayed', async () => {
   await chai.expect(searchPage.labelCharacterName.getAttribute('innerText'))
     .to.eventually.contain('Chewbacca');
@@ -82,5 +58,21 @@ When('I enter a valid character in the search field', async () => {
 
 When('I press enter', async () => {
   await searchPage.btnSearch.sendKeys(protractor.Key.ENTER);
+});
+
+When(/^I search for planet "([^"]*)"$/, async (planetName) => {
+  await searchPage.radioBtnPlanets.click();
+  await searchPage.inputSearch.sendKeys(planetName);
+  await searchPage.btnSearch.click();
+});
+
+When(/^I search for character "([^"]*)"$/, async (characterName) => {
+  await searchPage.radioBtnPeople.click();
+  await searchPage.inputSearch.sendKeys(characterName);
+  await searchPage.btnSearch.click();
+});
+
+When('I switch to search for people', async () => {
+  await searchPage.radioBtnPeople.click();
 })
 ;
