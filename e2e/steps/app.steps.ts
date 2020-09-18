@@ -1,3 +1,6 @@
+// tslint:disable-next-line:comment-format
+ //import {element} from 'protractor';
+
 const { Given , When , Then } = require('cucumber');
 const { browser, by } = require('protractor');
 const chai = require('chai');
@@ -52,8 +55,14 @@ When('I search for an invalid planet', async () => {
   });
 
 Then('the details of the planet are displayed', async () => {
-  // Write code here that turns the phrase above into concrete actions
-  return 'pending';
+  await chai.expect(searchPage.labelPlanetName.getAttribute('innerText'))
+    .to.eventually.contain('Endor');
+  await chai.expect(searchPage.labelPopulation.getAttribute('innerText'))
+    .to.eventually.contain('30000000');
+  await chai.expect(searchPage.labelClimate.getAttribute('innerText'))
+    .to.eventually.contain('temperate');
+  await chai.expect(searchPage.labelGravity.getAttribute('innerText'))
+    .to.eventually.contain('0.85 standard');
 });
 
   Then('a message is display that nothing is found', async () => {
@@ -74,6 +83,6 @@ Then('the details of the planet are displayed', async () => {
   });
 
   Then('I should get an empty result field', async () => {
-    // Write code here that turns the phrase above into concrete actions
-    return 'pending';
+
+    await chai.expect(searchPage.cardBlock.isDisplayed()).to.eventually.be.false;
   });
