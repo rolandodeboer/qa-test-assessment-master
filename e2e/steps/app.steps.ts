@@ -52,8 +52,8 @@ Then('I should get an empty result field', async () => {
   await chai.expect(searchPage.cardBlock.isDisplayed()).to.eventually.be.false;
 });
 
-When('I enter a valid character in the search field', async () => {
-  await searchPage.inputSearch.sendKeys('Chewbacca');
+When(/^I enter "([^"]*)" in the search field$/, async (searchQuery) => {
+  await searchPage.inputSearch.sendKeys(searchQuery);
 });
 
 When('I press enter', async () => {

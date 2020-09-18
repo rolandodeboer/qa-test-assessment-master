@@ -19,7 +19,7 @@ Feature: Search for Star Wars characters
 
   Scenario: Search is submitted when pressing enter
     Given The app is open on "localhost"
-    When I enter a valid character in the search field
+    When I enter "Chewbacca" in the search field
     And I press enter
     Then the details of the character are displayed
 
