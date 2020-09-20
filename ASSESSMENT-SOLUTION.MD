@@ -8,6 +8,7 @@ Rolando de Boer
 (rolando.de.boer@the-future-group.com)
 
 ## Remarks
+1. I have chosen to leave some data in the feature files (e.g."The app is open on "localhost"). My personal preference would be to leave out this data, so that scenarios become more readable and unserstandable to stakeholders who are less technical and/or know less details about the system (e.g. "The app is opened"). I would be happy to discuss the pros and cons of different the different approaches.
 
 ## Solution
 The solution is based on a BDD approach using the following tools:
