@@ -11,7 +11,7 @@ Feature: Search for Star Wars characters
     And I search for character "Invalid character"
     Then a message is display that nothing is found
 
-  Scenario: Search results should be cleared when searching on empty input
+  Scenario: Search results should be cleared when searching based on empty input
     And I search for character "Luke Skywalker"
     And I clear the search field
     And I click the search button

@@ -9,6 +9,7 @@ Rolando de Boer
 
 ## Remarks
 1. I have chosen to leave some data in the feature files (e.g."The app is open on "localhost"). My personal preference would be to leave out this data, so that scenarios become more readable and unserstandable to stakeholders who are less technical and/or know less details about the system (e.g. "The app is opened"). I would be happy to discuss the pros and cons of different the different approaches.
+2. One scenarios is failing. This is rightfully so, because the functionality is not according to the specs ("Search results should be cleared when searching based on empty input").
 
 ## Solution
 The solution is based on a BDD approach using the following tools:
