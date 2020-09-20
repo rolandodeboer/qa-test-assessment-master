@@ -23,5 +23,10 @@ Feature: Search for Star Wars characters
     And I press enter
     Then the details of the character are displayed
 
+  Scenario: Search based on partial match returns more than one result
+    Given The app is open on "localhost"
+    When I search for character "E"
+    Then I should get multiple results
+
 
 

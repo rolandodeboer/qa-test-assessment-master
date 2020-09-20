@@ -1,4 +1,4 @@
-import {protractor} from 'protractor';
+import {element, protractor} from 'protractor';
 
 const {Given, When, Then} = require('cucumber');
 const {browser, by} = require('protractor');
@@ -76,3 +76,11 @@ When('I switch to search for people', async () => {
   await searchPage.radioBtnPeople.click();
 })
 ;
+Then(/^I should get multiple results$/, async () => {
+  const result = element.all(by.xpath('//h6[@class=\'card-subtitle mb-2 text-muted\']'));
+
+  await browser.sleep(500);
+  await result.count().then(function (totalResults) {
+    chai.expect(totalResults).to.be.above(1);
+  });
+});
